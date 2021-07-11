@@ -1,5 +1,6 @@
 from . import session
 
+
 class Categories(object):
     def __init__(self):
         pass
