@@ -10,7 +10,7 @@ def categories_keys():
     return ['id', 'exclude_from_budget', 'is_income']
 
 
-@vcr.use_cassette('tests/records/categories.yml')
+@vcr.use_cassette('tests/records/categories.yml', filter_query_parameters=['access_token'])
 def test_get_all_categories(categories_keys):
     """Tests if a list of all categories associated with the user's account is returned"""
 
