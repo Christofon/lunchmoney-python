@@ -2,7 +2,7 @@ import vcr
 # to only define a subset of the response to test on
 from pytest import fixture
 
-from lunchmoney import Categories
+from lunchmoney import Categories, Tags
 
 
 @fixture
@@ -28,4 +28,12 @@ def test_create_categorie():
     response = categories_instance.create_categorie({'name': 'Test'})
 
     assert response['category_id']
-   
+
+
+@vcr.use_cassette('tests/records/tags.yml', filter_query_parameters=['access_token'])
+def test_get_all_tags():
+    """Test if a list of tags gets returned."""
+    tags_instance = Tags()
+    response = tags_instance.get_all_tags()
+
+    assert set(['id', 'name']).issubset(response[0])
