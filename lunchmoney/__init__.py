@@ -1,3 +1,5 @@
+from .tags import Tags
+from .categories import Categories
 import os
 import requests
 
@@ -20,5 +22,3 @@ if LUNCHMONEY_API_KEY is None:
 session = requests.Session()
 session.params = {}
 session.params['access_token'] = LUNCHMONEY_API_KEY
-
-from .categories import Categories
