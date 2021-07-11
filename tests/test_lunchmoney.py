@@ -12,11 +12,20 @@ def categories_keys():
 
 @vcr.use_cassette('tests/records/categories.yml', filter_query_parameters=['access_token'])
 def test_get_all_categories(categories_keys):
-    """Tests if a list of all categories associated with the user's account is returned"""
-
+    """Tests if a list of all categories associated with the user's account is returned."""
     categories_instance = Categories()
     response = categories_instance.get_all_categories()
 
     assert isinstance(response, dict)
     assert set(categories_keys).issubset(
         dict(response['categories'][0]).keys())
+
+
+@vcr.use_cassette('tests/records/create_categorie.yml', filter_query_parameters=['access_token'])
+def test_create_categorie():
+    """Test if a test categorie is created."""
+    categories_instance = Categories()
+    response = categories_instance.create_categorie({'name': 'Test'})
+
+    assert response['category_id']
+   
