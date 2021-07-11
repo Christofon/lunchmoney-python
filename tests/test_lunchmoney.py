@@ -1,5 +1,7 @@
-from pytest import fixture
+import vcr
 # to only define a subset of the response to test on
+from pytest import fixture
+
 from lunchmoney import Categories
 
 
@@ -8,6 +10,7 @@ def categories_keys():
     return ['id', 'exclude_from_budget', 'is_income']
 
 
+@vcr.use_cassette('tests/records/categories.yml')
 def test_get_all_categories(categories_keys):
     """Tests if a list of all categories associated with the user's account is returned"""
 
